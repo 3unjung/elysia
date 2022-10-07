@@ -4,15 +4,15 @@ class ArchiveELysiaPage extends StatefulWidget {
   const ArchiveELysiaPage({Key? key}) : super(key: key);
 
   @override
-  State<ArchiveELysiaPage> createState() => _ArchiveELysiaPageState();
+  State<ArchiveELysiaPage> createState() => _ArchiveElysiaPageState();
 }
 
-class _ArchiveELysiaPageState extends State<ArchiveELysiaPage> {
+class _ArchiveElysiaPageState extends State<ArchiveELysiaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-      title: Text("Les archives de Elysia"),
+      title: const Text("Les archives de Elysia"),
       // si false désactive la fleche de retour
       automaticallyImplyLeading: false,
       leading: IconButton(
@@ -33,7 +33,9 @@ class _ArchiveELysiaPageState extends State<ArchiveELysiaPage> {
                 )
                 ),
               ],
+
             )
+
 
 
     );

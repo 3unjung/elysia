@@ -1,5 +1,7 @@
 import 'package:elysia/home_page.dart';
+import 'package:elysia/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +35,11 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
+  List<Widget> pages = const [
+    HomePage(),
+    ProfilePage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,16 +48,15 @@ class _RootPageState extends State<RootPage> {
         title: const Center(child: Text("Elysia ")),
 
       ),
-      body: const HomePage(),
-
+      body: pages[currentPage],
       floatingActionButton: FloatingActionButton(onPressed: (){
         // output text
         debugPrint("test success Floating Action Button");
       },
-      child: Icon(Icons.add)
+      child: const Icon(Icons.add)
       ),
       bottomNavigationBar: NavigationBar(
-        destinations: [
+        destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],

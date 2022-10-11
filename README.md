@@ -1,6 +1,6 @@
 # elysia
 
-Elysia Waifu
+Just a little Flutter application Android with Elysia's theme from Honkai Impact and some dishes created myself.
 
 ## Getting Started
 

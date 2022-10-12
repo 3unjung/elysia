@@ -57,7 +57,7 @@ class _RootPageState extends State<RootPage> {
       bottomNavigationBar: NavigationBar(
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+          NavigationDestination(icon: Icon(Icons.local_pizza), label: 'Pizza'),
         ],
         onDestinationSelected: (int index){
           // setState() rend la page static, interactive

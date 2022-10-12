@@ -10,17 +10,15 @@ class DishesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // contenu sur tous les screens
     return Scaffold(
-        appBar: TheAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SearchSection(),
-              DishesSection(),
-
-
-            ],
-          ),
+      appBar: TheAppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SearchSection(),
+            DishesSection(),
+          ],
         ),
+      ),
     );
   }
 }
@@ -93,8 +91,7 @@ class SearchSection extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),
                 child: ElevatedButton(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   // si valeur sur null ça bloquera le bouton
                   child: Icon(
                     Icons.search,
@@ -164,14 +161,22 @@ class SearchSection extends StatelessWidget {
                 ),
               )
             ],
-          )
+          ),
         ],
       ),
     );
   }
 }
 
-class DishesSection extends StatelessWidget {
+class DishesSection extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return DishesSectionState();
+  }
+}
+
+class DishesSectionState extends State<DishesSection> {
   final List dishesList = [
     // déclaration des maps
     {
@@ -179,7 +184,7 @@ class DishesSection extends StatelessWidget {
       'duration': "15",
       'image': 'assets/images/elysia_maku.jpg',
       'message':
-          "Vice Capitaine des Chasseurs de flammes. Elle est la première à s\'ètre présentée à Raiden Mei."
+          "Vice Capitaine des Chasseurs de flammes. Elle est la première à s'être présentée à Raiden Mei."
     },
 
     {
@@ -187,7 +192,7 @@ class DishesSection extends StatelessWidget {
       'duration': "15",
       'image': 'assets/images/ely.jpg',
       'message':
-          "Comme vous pouvez le voir, cette fille aussi jolie et douce qu\'une fleur est le second de Kevin"
+          "Comme vous pouvez le voir, cette fille aussi jolie et douce qu'une fleur est le second de Kevin"
     },
 
     {
@@ -195,7 +200,7 @@ class DishesSection extends StatelessWidget {
       'duration': "15",
       'image': 'assets/images/nillou_vibes.jpg',
       'message':
-          "Une fille insouciante et désinhibée qui n'a rien d\'un commandant en second."
+          "Une fille insouciante et désinhibée qui n'a rien d'un commandant en second."
     },
   ];
 
@@ -219,7 +224,6 @@ class DishesSection extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
-
                 Text(
                   " Durée mn/mn ",
                   style: TextStyle(
@@ -227,7 +231,6 @@ class DishesSection extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
-
                 const SizedBox(height: 5),
                 IconButton(
                   icon: Icon(Icons.favorite_outline_rounded),
@@ -240,10 +243,19 @@ class DishesSection extends StatelessWidget {
 
           // liste des plats
           Column(
-            children: dishesList.map((dishes) {
-                return DishesCard(dishes);
-              }).toList(),
-
+            children: dishesList.map((dishData) {
+              // Retourne les plats
+              // return DishesCard(dishes);
+              String dishName = dishData["name"];
+              return Dismissible(
+                key: Key(dishName), child: DishesCard(dishData),
+                onDismissed: (direction) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("${dishName} supprimé")));
+                },
+                background: Container(color: Colors.white,),
+              );
+            }).toList(),
           )
         ],
       ),
@@ -282,12 +294,13 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class DishesCard extends StatefulWidget {
   final Map dishesData;
-  const DishesCard(this.dishesData, {super.key});
 
+  const DishesCard(this.dishesData, {super.key});
 
   @override
   State<DishesCard> createState() => DishesCardState();
 }
+
 class DishesCardState extends State<DishesCard> {
   bool isLiked = false;
 
@@ -308,7 +321,7 @@ class DishesCardState extends State<DishesCard> {
           )
         ],
       ),
-      // colone de l'image
+      // colonne de l'image
       child: Column(children: [
         Container(
           height: 140,
@@ -336,17 +349,18 @@ class DishesCardState extends State<DishesCard> {
                   color: Colors.white,
                   // mise en forme du bouton
                   shape: CircleBorder(),
-                  onPressed: (
-                      ) {
-                    debugPrint("You touchs my Tralala");
+                  onPressed: () {
+                    debugPrint("You touches my Tralala");
                     setState(() {
                       debugPrint(isLiked ? "true" : "false");
                       isLiked = !isLiked;
                     });
-                    },
+                  },
 
-                  child: Icon((isLiked == false) ? Icons.favorite :
-                    Icons.favorite_outline_rounded,
+                  child: Icon(
+                    (isLiked == false)
+                        ? Icons.favorite
+                        : Icons.favorite_outline_rounded,
                     color: Colors.pinkAccent,
                     size: 30,
                   ),
@@ -391,17 +405,12 @@ class DishesCardState extends State<DishesCard> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-
               )
             ],
           ),
         ),
       ]),
-
     );
-
   }
 }
-//
-//
 

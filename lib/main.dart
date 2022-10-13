@@ -1,7 +1,7 @@
-import 'package:elysia/screen/settings/profile.dart';
+// import 'package:elysia/screen/settings/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:elysia/screen/dish/dishes.dart';
-import 'screen/dish/fullscreen_dish.dart';
+// import 'screen/dish/fullscreen_dish.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      /*initialRoute: "/",
-      routes: {
-        '/': (context) => const DishesPage(),
-        '/page': (context) => const DishesScreen(),
-
-      },*/
       // retire le logo debug
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.pink),
       home: const DishesPage(),
+
     );
   }
 }

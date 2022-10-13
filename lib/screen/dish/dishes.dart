@@ -5,6 +5,7 @@ import '../../partials/top_appbar.dart';
 // variable de couleur
 const bgRosa = Color(0xFFfbfbfb);
 
+
 class DishesPage extends StatelessWidget {
   const DishesPage({Key? key}) : super(key: key);
 
@@ -22,9 +23,7 @@ class DishesPage extends StatelessWidget {
           ],
         ),
       ),
-
       bottomNavigationBar: const NavBarBottom() ,
-
     );
   }
 }

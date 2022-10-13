@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 // permet d'utiliser des méthodes plus avancées pour notre navbar
 class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const TheAppBar({super.key});
+
   @override
   Size get preferredSize => const Size.fromHeight(50);
 
@@ -13,7 +15,6 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Text(
           "Les plats d'Elysia",
           style: TextStyle(fontWeight: FontWeight.w900),
-
 
         ),
       ),

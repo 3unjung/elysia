@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'labarrebtm.dart';
+import '../../partials/btm_navbar.dart';
+import '../../partials/top_appbar.dart';
 
 // variable de couleur
-const bg_rosa = Color(0xFFfbfbfb);
+const bgRosa = Color(0xFFfbfbfb);
 
 class DishesPage extends StatelessWidget {
   const DishesPage({Key? key}) : super(key: key);
@@ -11,18 +12,18 @@ class DishesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // contenu sur tous les screens
     return Scaffold(
-      appBar: TheAppBar(),
+      appBar: const TheAppBar(),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            const SearchSection(),
+          children: const [
+            SearchSection(),
             DishesSection(),
             // NavBarBottom(),
           ],
         ),
       ),
 
-      bottomNavigationBar: NavBarBottom() ,
+      bottomNavigationBar: const NavBarBottom() ,
 
     );
   }
@@ -33,9 +34,9 @@ class SearchSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = new DateTime.now();
+    DateTime now = DateTime.now();
     DateTime date =
-        new DateTime(now.year, now.month, now.day, now.hour, now.minute);
+        DateTime(now.year, now.month, now.day, now.hour, now.minute);
 
     return Container(
       color: Colors.grey[200],
@@ -97,16 +98,16 @@ class SearchSection extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {},
-                  // si valeur sur null ça bloquera le bouton
-                  child: Icon(
-                    Icons.search,
-                    size: 30,
-                  ),
                   style: ElevatedButton.styleFrom(
                     // mise en forme du container de la loupe
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     backgroundColor: Colors.lightBlueAccent,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
+                  ),
+                  // si valeur sur null ça bloquera le bouton
+                  child: const Icon(
+                    Icons.search,
+                    size: 30,
                   ),
                 ),
               ),
@@ -120,22 +121,22 @@ class SearchSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                margin: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 child: Column(
                   // aligne au début du container le texte
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Date d'aujourd'hui",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 20,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       "${date.day}/${date.month}/${date.year}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 20,
                       ),
@@ -144,20 +145,20 @@ class SearchSection extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       "Heure Actuelle",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 20,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       "${date.hour}:${date.minute}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 20,
                       ),
@@ -174,6 +175,8 @@ class SearchSection extends StatelessWidget {
 }
 
 class DishesSection extends StatefulWidget {
+  const DishesSection({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -212,7 +215,7 @@ class DishesSectionState extends State<DishesSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       color: Colors.grey[200],
       child: Column(
         children: [
@@ -222,7 +225,7 @@ class DishesSectionState extends State<DishesSection> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
+                const Text(
                   "Nom du plat",
                   style: TextStyle(
                     color: Colors.white,
@@ -238,7 +241,7 @@ class DishesSectionState extends State<DishesSection> {
                 ),
                 const SizedBox(height: 5),
                 IconButton(
-                  icon: Icon(Icons.favorite_outline_rounded),
+                  icon: const Icon(Icons.favorite_outline_rounded),
                   color: Colors.white,
                   onPressed: () {},
                 ),
@@ -254,14 +257,14 @@ class DishesSectionState extends State<DishesSection> {
               String dishName = dishData["name"];
               return Dismissible(
                 key: Key(dishName),
-                child: DishesCard(dishData),
                 onDismissed: (direction) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("${dishName} supprimé")));
+                      SnackBar(content: Text("$dishName supprimé")));
                 },
                 background: Container(
                   color: Colors.white,
                 ),
+                child: DishesCard(dishData),
               );
             }).toList(),
           )
@@ -271,34 +274,6 @@ class DishesSectionState extends State<DishesSection> {
   }
 }
 
-// permet d'utiliser des méthodes plus avancées pour notre navbar
-class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Size get preferredSize => const Size.fromHeight(50);
-
-  // return notre navbar
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: const Center(
-        child: Text(
-          "Les plats d'Elysia",
-          style: TextStyle(fontWeight: FontWeight.w900),
-        ),
-      ),
-      actions: const [
-        IconButton(
-            icon: Icon(Icons.favorite_outline_rounded),
-            color: Colors.lightBlueAccent,
-            onPressed: null),
-        IconButton(
-            icon: Icon(Icons.place),
-            color: Colors.lightBlueAccent,
-            onPressed: null),
-      ],
-    );
-  }
-}
 
 class DishesCard extends StatefulWidget {
   final Map dishesData;
@@ -323,17 +298,17 @@ class DishesCardState extends State<DishesCard> {
                 builder: (context) => DishesCard(widget.dishesData)));
       },
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         height: 230,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(18)),
+          borderRadius: const BorderRadius.all(Radius.circular(18)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade200,
               spreadRadius: 4,
               blurRadius: 6,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             )
           ],
         ),
@@ -349,7 +324,7 @@ class DishesCardState extends State<DishesCard> {
                 fit: BoxFit.cover,
               ),
               // radius sur le côté droit et gauche
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(18),
                 topRight: Radius.circular(18),
               ),
@@ -364,7 +339,7 @@ class DishesCardState extends State<DishesCard> {
                   child: MaterialButton(
                     color: Colors.white,
                     // mise en forme du bouton
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     onPressed: () {
                       debugPrint("You touches my Tralala");
                       setState(() {
@@ -386,20 +361,20 @@ class DishesCardState extends State<DishesCard> {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   widget.dishesData["name"],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 Text(
                   widget.dishesData["duration"] + "minutes",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
                   ),
@@ -408,14 +383,14 @@ class DishesCardState extends State<DishesCard> {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: [
                 Expanded(
                   child: Text(
                     widget.dishesData["message"],
                     maxLines: 1,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16, color: Colors.grey,
                       // ellipsis = ...
                       overflow: TextOverflow.ellipsis,

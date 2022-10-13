@@ -1,4 +1,6 @@
-import 'package:elysia/dishes_page.dart';
+import 'package:elysia/screen/dish/dishes.dart';
+import 'package:elysia/screen/dish/fullscreen_dish.dart';
+import 'package:elysia/screen/settings/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -13,14 +15,14 @@ class _NavBarBottomState extends State<NavBarBottom> {
   @override
   Widget build(BuildContext context) {
     // index de la route
-    int current_index = 0;
+    //int currentIndex = 0;
 
     return Container(
       color: Colors.pink,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-        child: GNav(
 
+        child: GNav(
           iconSize: 30,
           // espacement entre l'icon et le label
           gap: 7,
@@ -29,35 +31,30 @@ class _NavBarBottomState extends State<NavBarBottom> {
           activeColor: Colors.black,
           tabBackgroundColor: Colors.pinkAccent,
           // espacement par rapport au container
-          padding: EdgeInsets.all(7),
+          padding: const EdgeInsets.all(7),
 
-          tabs: const [
-            GButton(
-              icon: Icons.local_pizza_outlined,
-              text: "Pizza",
-            ),
+          tabs: [
             GButton(
               icon: Icons.home,
               text: "Home",
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DishesScreen()));
+              },
             ),
             GButton(
               icon: Icons.favorite_border,
               text: "Likes",
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DishesPage()));
+                },
             ),
             GButton(
               icon: Icons.settings,
-              text: "Settings",
+              text: "Settings",onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  const ProfilePage()));
+            },
             ),
           ],
-          selectedIndex: current_index,
-          onTabChange: (index) {
-            setState(() {
-               current_index = index;
-
-               print("route numéro ===== ${index} ");
-            });
-          },
-
         ),
       ),
     );

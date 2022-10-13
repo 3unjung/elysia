@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'labarrebtm.dart';
 
 // variable de couleur
 const bg_rosa = Color(0xFFfbfbfb);
@@ -16,9 +17,13 @@ class DishesPage extends StatelessWidget {
           children: [
             const SearchSection(),
             DishesSection(),
+            // NavBarBottom(),
           ],
         ),
       ),
+
+      bottomNavigationBar: NavBarBottom() ,
+
     );
   }
 }
@@ -248,12 +253,15 @@ class DishesSectionState extends State<DishesSection> {
               // return DishesCard(dishes);
               String dishName = dishData["name"];
               return Dismissible(
-                key: Key(dishName), child: DishesCard(dishData),
+                key: Key(dishName),
+                child: DishesCard(dishData),
                 onDismissed: (direction) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("${dishName} supprimé")));
+                      SnackBar(content: Text("${dishName} supprimé")));
                 },
-                background: Container(color: Colors.white,),
+                background: Container(
+                  color: Colors.white,
+                ),
               );
             }).toList(),
           )
@@ -306,111 +314,119 @@ class DishesCardState extends State<DishesCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      height: 230,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(18)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            spreadRadius: 4,
-            blurRadius: 6,
-            offset: Offset(0, 3),
-          )
-        ],
-      ),
-      // colonne de l'image
-      child: Column(children: [
-        Container(
-          height: 140,
-          decoration: BoxDecoration(
-            // color: Colors.lightGreen,
-            image: DecorationImage(
-              image: AssetImage(widget.dishesData['image']),
-              // étends l'image sur tout l'espace disponible
-              fit: BoxFit.cover,
+    // détecte un clic ou un presse sur les cards
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DishesCard(widget.dishesData)));
+      },
+      child: Container(
+        margin: EdgeInsets.all(10),
+        height: 230,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade200,
+              spreadRadius: 4,
+              blurRadius: 6,
+              offset: Offset(0, 3),
+            )
+          ],
+        ),
+        // colonne de l'image
+        child: Column(children: [
+          Container(
+            height: 140,
+            decoration: BoxDecoration(
+              // color: Colors.lightGreen,
+              image: DecorationImage(
+                image: AssetImage(widget.dishesData['image']),
+                // étends l'image sur tout l'espace disponible
+                fit: BoxFit.cover,
+              ),
+              // radius sur le côté droit et gauche
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(18),
+                topRight: Radius.circular(18),
+              ),
             ),
-            // radius sur le côté droit et gauche
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(18),
-              topRight: Radius.circular(18),
-            ),
-          ),
-          // superpose un bouton sur l'image
-          child: Stack(
-            children: [
-              Positioned(
-                top: 5,
-                right: -15,
-                // bouton like
-                child: MaterialButton(
-                  color: Colors.white,
-                  // mise en forme du bouton
-                  shape: CircleBorder(),
-                  onPressed: () {
-                    debugPrint("You touches my Tralala");
-                    setState(() {
-                      debugPrint(isLiked ? "true" : "false");
-                      isLiked = !isLiked;
-                    });
-                  },
+            // superpose un bouton sur l'image
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 5,
+                  right: -15,
+                  // bouton like
+                  child: MaterialButton(
+                    color: Colors.white,
+                    // mise en forme du bouton
+                    shape: CircleBorder(),
+                    onPressed: () {
+                      debugPrint("You touches my Tralala");
+                      setState(() {
+                        debugPrint(isLiked ? "true" : "false");
+                        isLiked = !isLiked;
+                      });
+                    },
 
-                  child: Icon(
-                    (isLiked == false)
-                        ? Icons.favorite
-                        : Icons.favorite_outline_rounded,
-                    color: Colors.pinkAccent,
-                    size: 30,
+                    child: Icon(
+                      (isLiked == false)
+                          ? Icons.favorite
+                          : Icons.favorite_outline_rounded,
+                      color: Colors.pinkAccent,
+                      size: 30,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                widget.dishesData["name"],
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Text(
-                widget.dishesData["duration"] + "minutes",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  widget.dishesData["message"],
-                  maxLines: 1,
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.dishesData["name"],
                   style: TextStyle(
-                    fontSize: 16, color: Colors.grey,
-                    // ellipsis = ...
-                    overflow: TextOverflow.ellipsis,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-              )
-            ],
+                Text(
+                  widget.dishesData["duration"] + "minutes",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ]),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.dishesData["message"],
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 16, color: Colors.grey,
+                      // ellipsis = ...
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }
-

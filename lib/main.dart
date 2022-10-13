@@ -1,6 +1,7 @@
 import 'package:elysia/home_page.dart';
 import 'package:elysia/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:elysia/dishes_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,14 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // retire le logo debug
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.pink
-      ),
-      home: const RootPage(),
+      theme: ThemeData(primarySwatch: Colors.pink),
+      home: DishesPage(),
     );
   }
 }
-
 
 // Créer une page interative
 class RootPage extends StatefulWidget {
@@ -45,29 +43,29 @@ class _RootPageState extends State<RootPage> {
       appBar: AppBar(
         // centre les élements à l'interieur de la barre
         title: const Center(child: Text("Elysia ")),
-
       ),
       body: pages[currentPage],
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        // output text
-        debugPrint("test success Floating Action Button");
-      },
-      child: const Icon(Icons.add)
-      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // output text
+            debugPrint("test success Floating Action Button");
+          },
+          child: const Icon(Icons.add)),
       bottomNavigationBar: NavigationBar(
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.local_pizza), label: 'Pizza'),
         ],
-        onDestinationSelected: (int index){
+
+        onDestinationSelected: (int index) {
           // setState() rend la page static, interactive
           setState(() {
             currentPage = index;
           });
-          },
+
+        },
         selectedIndex: currentPage,
       ),
     );
   }
 }
-

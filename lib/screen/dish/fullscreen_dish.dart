@@ -1,12 +1,16 @@
 import 'package:elysia/partials/btm_navbar.dart';
 import 'package:elysia/partials/top_appbar.dart';
 import 'package:elysia/screen/dish/dishes.dart';
+import 'package:elysia/screen/dish/rating_stars.dart';
+import 'package:elysia/screen/dish/carrousel.dart';
+import 'dishes.dart';
+
 
 // import 'package:elysia/screen/dish/dishes.dart';
 import 'package:flutter/material.dart';
 
-// hexa color
-const silver = Color(0xffFBFBFB);
+// hex color
+const bonbon = Color(0xffFFEAF1);
 
 class DishesScreen extends StatefulWidget {
   const DishesScreen({Key? key}) : super(key: key);
@@ -16,6 +20,7 @@ class DishesScreen extends StatefulWidget {
 }
 
 class _DishesScreenState extends State<DishesScreen> {
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -39,7 +44,7 @@ class _FullScreenState extends State<FullScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[200],
+      // color: Colors.grey[200],
       // 10px à chaque padding
       padding: const EdgeInsets.all(10),
 
@@ -49,7 +54,7 @@ class _FullScreenState extends State<FullScreen> {
           Container(
             padding: const EdgeInsets.all(15),
             decoration: const BoxDecoration(
-              color: silver,
+              // color: bonbon,
               border: Border(
                 left: BorderSide(width: 7, color: Colors.pinkAccent),
               ),
@@ -71,36 +76,30 @@ class _FullScreenState extends State<FullScreen> {
                 "https://i.pinimg.com/736x/e6/aa/49/e6aa4972eb0adb6e228ae579fe6a25c1.jpg"),
           ),
 
-          // rangée de container sous l'image
+          // containers sous l'image
           Container(
             decoration: const BoxDecoration(
-                color: silver,
+
                 border: Border(
                 left: BorderSide(width: 7, color: Colors.pinkAccent),
               )
 
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // row rate up
-                Row(
-                  children: const [
-                    Icon(
-                      Icons.star_border,
-                      color: Colors.yellowAccent,
-                    ),
-                    Icon(Icons.star_border),
-                    Icon(Icons.star_border),
-                    Icon(Icons.star_border),
-                    Icon(Icons.star_border)
-                  ],
-                ),
+                Container(
+                alignment: Alignment.center,
 
+                  child: const RatingBarScreen(),
+
+                ),
                 // container canvas
                 Container(
                   height: 50,
                   decoration: const BoxDecoration(
+                    color: Colors.orange,
                       border: Border(
                         left: BorderSide(width: 7, color: Colors.pinkAccent),
                       )
@@ -109,9 +108,15 @@ class _FullScreenState extends State<FullScreen> {
                 ),
               ],
             )
-          )
+          ),
+
+
+          const SizedBox(height: 25),
+          const Carrousel(),
+
         ],
       ),
     );
   }
 }
+

@@ -32,6 +32,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_rating_bar: ^4.0.1
+  carousel_slider: ^4.1.1
+  banner_carousel: ^1.2.1
+  flutter_carousel_slider: ^1.0.9
+
 
   google_nav_bar: ^5.0.6
 
@@ -71,6 +76,11 @@ flutter:
     - assets/images/elysia_maku.jpg
     - assets/images/ely.jpg
     - assets/images/nillou_vibes.jpg
+    - assets/images/barbecue.jpg
+    - assets/images/cury.jpg
+    - assets/images/filletmignon.jpg
+    - assets/images/gratin.jpg
+    - assets/images/pizzachorizo.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

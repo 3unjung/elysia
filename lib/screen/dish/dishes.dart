@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../partials/btm_navbar.dart';
 import '../../partials/top_appbar.dart';
+import 'fullscreen_dish.dart';
 
 // variable de couleur
 const bgRosa = Color(0xFFfbfbfb);
-
 
 class DishesPage extends StatelessWidget {
   const DishesPage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class DishesPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const NavBarBottom() ,
+      bottomNavigationBar: const NavBarBottom(),
     );
   }
 }
@@ -273,7 +273,6 @@ class DishesSectionState extends State<DishesSection> {
   }
 }
 
-
 class DishesCard extends StatefulWidget {
   final Map dishesData;
 
@@ -291,10 +290,8 @@ class DishesCardState extends State<DishesCard> {
     // détecte un clic ou un presse sur les cards
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DishesCard(widget.dishesData)));
+              debugPrint("You touches my trallala");
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DishesScreen()));
       },
       child: Container(
         margin: const EdgeInsets.all(10),

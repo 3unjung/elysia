@@ -187,27 +187,28 @@ class DishesSectionState extends State<DishesSection> {
   final List dishesList = [
     // déclaration des maps
     {
-      'name': 'exemple simple',
+      'name': 'Giga Barbecue',
       'duration': "15",
-      'image': 'assets/images/elysia_maku.jpg',
+      'image': 'assets/images/barbecue.jpg',
       'message':
-          "Vice Capitaine des Chasseurs de flammes. Elle est la première à s'être présentée à Raiden Mei."
+          "Ce truc rempli le ventre comme jamais"
     },
 
     {
-      'name': 'exemple encore très simple',
+      'name': 'Poulet au curry et riz',
       'duration': "15",
-      'image': 'assets/images/ely.jpg',
+      'image': 'assets/images/cury.jpg',
       'message':
-          "Comme vous pouvez le voir, cette fille aussi jolie et douce qu'une fleur est le second de Kevin"
+          "Un peu plus léger ; idéal le midi"
     },
 
+
     {
-      'name': 'alors là encore plus simple',
+      'name': 'Gratin pate au jambon',
       'duration': "15",
-      'image': 'assets/images/nillou_vibes.jpg',
+      'image': 'assets/images/gratin.jpg',
       'message':
-          "Une fille insouciante et désinhibée qui n'a rien d'un commandant en second."
+      "Alors là c'est le pied pour se remplir la pense"
     },
   ];
 
@@ -291,7 +292,9 @@ class DishesCardState extends State<DishesCard> {
     return GestureDetector(
       onTap: () {
               debugPrint("You touches my trallala");
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DishesScreen()));
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DishesScreen(dishesScreen: null,)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=>const FullScreen(duTexte: "test?"),));
       },
       child: Container(
         margin: const EdgeInsets.all(10),

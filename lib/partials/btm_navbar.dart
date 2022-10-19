@@ -38,7 +38,7 @@ class _NavBarBottomState extends State<NavBarBottom> {
               icon: Icons.home,
               text: "Home",
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DishesScreen()));
+                // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DishesScreen()));
               },
             ),
             GButton(

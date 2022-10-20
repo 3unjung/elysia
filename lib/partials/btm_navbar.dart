@@ -54,6 +54,12 @@ class _NavBarBottomState extends State<NavBarBottom> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  const ProfilePage()));
             },
             ),
+
+            GButton(
+                icon: Icons.local_pizza_outlined,
+            text: "Pizzas", onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
+            },)
           ],
         ),
       ),

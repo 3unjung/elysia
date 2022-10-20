@@ -1,11 +1,10 @@
 import 'package:elysia/partials/btm_navbar.dart';
 import 'package:elysia/partials/top_appbar.dart';
-import 'package:elysia/screen/dish/dishes.dart';
+import 'package:elysia/screen/dish/modal.dart';
 import 'package:elysia/screen/dish/rating_stars.dart';
 import 'package:elysia/screen/dish/carrousel.dart';
-import 'dishes.dart';
+import 'custome_image.dart';
 
-// import 'package:elysia/screen/dish/dishes.dart';
 import 'package:flutter/material.dart';
 
 // hex color
@@ -13,8 +12,10 @@ const bonbon = Color(0xffFFEAF1);
 
 class FullScreen extends StatefulWidget {
   final String duTexte;
+  final Map dishData;
 
-  const FullScreen({Key? key, required this.duTexte}) : super(key: key);
+  const FullScreen({Key? key, required this.duTexte, required this.dishData})
+      : super(key: key);
 
   @override
   State<FullScreen> createState() => _FullScreenState();
@@ -26,7 +27,6 @@ class _FullScreenState extends State<FullScreen> {
     return Scaffold(
       appBar: const TheAppBar(),
       bottomNavigationBar: const NavBarBottom(),
-
       body: SingleChildScrollView(
         child: Container(
           // color: Colors.grey[200],
@@ -46,19 +46,19 @@ class _FullScreenState extends State<FullScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    "Elysia Special Dish chorizo ${widget.duTexte}",
+                    "${widget.dishData['name']}",
                     style: const TextStyle(
                       fontSize: 18,
                     ),
                   ),
                 ),
               ),
-
-              Container(
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                child: Image.network(
-                    "https://i.pinimg.com/736x/e6/aa/49/e6aa4972eb0adb6e228ae579fe6a25c1.jpg"),
-              ),
+              //
+              // Container(
+              //     padding: const EdgeInsets.only(top: 15, bottom: 15),
+              //     child: Image.asset(
+              //       widget.dishData["image"],
+              //     )),
 
               // containers sous l'image
               Container(
@@ -80,7 +80,8 @@ class _FullScreenState extends State<FullScreen> {
                         decoration: const BoxDecoration(
                             color: Colors.orange,
                             border: Border(
-                              left: BorderSide(width: 7, color: Colors.pinkAccent),
+                              left: BorderSide(
+                                  width: 7, color: Colors.pinkAccent),
                             )),
                         child: const Text("plus petit que trois"),
                       ),
@@ -88,7 +89,32 @@ class _FullScreenState extends State<FullScreen> {
                   )),
 
               const SizedBox(height: 25),
-              const Carrousel(),
+
+              Center(
+                child: Text(
+                  widget.dishData["message"],
+                  style: const TextStyle(fontSize: 25),
+                ),
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+
+              Column(
+                children: const [
+                  Text(
+                    "Les plus appréciés",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  // Carrousel(),
+                  CustomeImage(
+                      image: 'https://img.cuisineaz.com/660x660/2016/05/13/i71494-pizza-au-chorizo-poivron-et-tomate-a-ma-facon.jpg'),
+
+                ],
+              )
             ],
           ),
         ),

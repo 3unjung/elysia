@@ -294,7 +294,7 @@ class DishesCardState extends State<DishesCard> {
               debugPrint("You touches my trallala");
               // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DishesScreen(dishesScreen: null,)));
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=>const FullScreen(duTexte: "test?"),));
+                  MaterialPageRoute(builder: (context)=> FullScreen(duTexte: "test?",  dishData: widget.dishesData,),));
       },
       child: Container(
         margin: const EdgeInsets.all(10),

@@ -1,4 +1,6 @@
-# elysia
+# Name project : Elysia
+
+First project with dart/Flutter
 
 Just a little Flutter application Android with Elysia's theme from Honkai Impact and some dishes created myself.
 
